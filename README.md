@@ -25,4 +25,6 @@ docker run --rm --name dockagator \
 
 This will use `"$(pwd)"` (the current directory) as the project directory and `"$HOME/.dockagator"` as
 the cached GatorGrader directory; both directories must exist, although only the
-project directory must contain something.
+project directory must contain something. The cache directory should not contain anything other than
+directories and programs created by DockaGator, otherwise they may be overridden. To create the
+directory given here (so that this exact command will work), execute `mkdir $HOME/.dockagator`.
