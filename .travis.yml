@@ -1,0 +1,24 @@
+language: generic
+dist: xenial
+os: linux
+
+install:
+  - gem install mdl
+  - docker pull hadolint/hadolint
+
+script:
+  - docker run --rm -i hadolint/hadolint < Dockerfile
+  - mdl README.md
+
+after_success:
+  - wget https://github.com/Michionlion/pr-tag-release/releases/latest/download/pr_tag_release.sh
+  - source pr_tag_release.sh
+
+# deploy to GitHub Releases on PR merge
+deploy:
+  provider: releases
+  api_key: "$GITHUB_OAUTH_TOKEN"
+  skip_cleanup: true
+  on:
+    all_branches: true
+    condition: $DO_GITHUB_RELEASE = true
