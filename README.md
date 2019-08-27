@@ -7,17 +7,20 @@ This repository contains the infrastructure needed to generate a Docker image
 that can run [GatorGradle](https://github.com/GatorEducator/gatorgradle)
 on an assignment or project.
 
-# Build
+## Build
 
 Simply run `./build.sh` to generate a new image.
 
-# Run
+## Run
 
 Run the following `docker run` command to execute `gradle grade` in the
 containerized application.
 
 ```bash
-docker run --rm --name dockagator -v "$(pwd)":/project -v "$HOME/.gatorgrader":/root/.local/share gatoreducator/dockagator
+docker run --rm --name dockagator \
+  -v "$(pwd)":/project \
+  -v "$HOME/.gatorgrader":/root/.local/share \
+  gatoreducator/dockagator
 ```
 
 This will use `"$(pwd)"` as the project directory and `"$HOME/.dockagator"` as
