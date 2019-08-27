@@ -13,7 +13,7 @@ Simply run `./build.sh` to generate a new image.
 
 ## Run
 
-Execute the following `docker run` command to execute `gradle grade` as a
+Execute the following `docker run` command to start `gradle grade` as a
 containerized application.
 
 ```bash
