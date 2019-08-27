@@ -23,6 +23,6 @@ docker run --rm --name dockagator \
   gatoreducator/dockagator
 ```
 
-This will use `"$(pwd)"` as the project directory and `"$HOME/.dockagator"` as
+This will use `"$(pwd)"` (the current directory) as the project directory and `"$HOME/.dockagator"` as
 the cached GatorGrader directory; both directories must exist, although only the
 project directory must contain something.
