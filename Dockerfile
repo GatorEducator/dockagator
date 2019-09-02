@@ -1,24 +1,19 @@
-FROM ubuntu:18.04
+FROM alpine:3.10
 
 # Expecting bind mounts at these locations
 ENV PROJECT_DIR=/project/
 ENV GATORGRADER_DIR=/root/.local/share/
-
-# Python UTF-8 setting
-ENV LC_ALL=C.UTF-8
-ENV LANG=C.UTF-8
 
 WORKDIR ${PROJECT_DIR}
 
 VOLUME ${PROJECT_DIR} ${GATORGRADER_DIR}
 
 # hadolint ignore=DL3008,DL3013,DL3015,DL3016,DL3018,DL3028
-RUN set -ex && echo "Installing packages..." && apt-get update \
-    && apt-get install -y bash python3 python3-pip git ruby openjdk-11-jdk gradle npm \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* \
+RUN set -ex && echo "Installing packages..." && apk update \
+    && apk add bash python3 git ruby openjdk11 gradle npm \
     && gem install mdl \
     && npm install -g htmlhint \
-    && pip3 install --upgrade pip \
+    && python -m pip install --upgrade pip \
     && pip install pipenv proselint \
     && mkdir -p /root/.gradle/ \
     && echo "org.gradle.daemon=true" >> /root/.gradle/gradle.properties \
