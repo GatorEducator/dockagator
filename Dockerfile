@@ -17,6 +17,7 @@ RUN set -ex && echo "Installing packages..." && apt-get update \
     && pip3 install --upgrade pip \
     && pip install pipenv proselint \
     && mkdir -p /root/.gradle/ \
+    && echo "LC_ALL=C.UTF-8\nLANG=C.UTF-8" >> /etc/environment \
     && echo "org.gradle.daemon=true" >> /root/.gradle/gradle.properties \
     && echo "systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false" >> /root/.gradle/gradle.properties \
     && echo "Testing Gradle..." && gradle --version
