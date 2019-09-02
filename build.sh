@@ -28,8 +28,7 @@ if [[ "$1" == "clean" ]]; then
     docker image rm --force "$IMAGE_NAME:latest"
 fi
 
-docker build -t "$NAME" .
-docker build -t "$IMAGE_NAME:latest" .
+docker build -t "$NAME" -t "$IMAGE_NAME:latest" .
 
 
 # Running
