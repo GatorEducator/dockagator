@@ -10,7 +10,8 @@ VOLUME ${PROJECT_DIR} ${GATORGRADER_DIR}
 
 # hadolint ignore=DL3008,DL3013,DL3015,DL3016,DL3018,DL3028
 RUN set -ex && echo "Installing packages..." && apk update \
-    && apk add bash python3 git ruby-rdoc openjdk11 gradle npm \
+    && apk add --no-cache bash python3 git ruby-rdoc openjdk11 gradle npm \
+    && rm -rf /var/cache/apk/* \
     && gem install mdl \
     && npm install -g htmlhint \
     && python3 -m pip install --upgrade pip \
