@@ -9,7 +9,7 @@ on an assignment or project.
 
 ## Build
 
-Simply run `./build.sh` to generate a new image.
+Simply run `./build.sh` to generate a new image locally.
 
 ## Run
 
