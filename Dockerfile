@@ -1,7 +1,8 @@
 FROM alpine:3.10
 
-# Expecting bind mounts at these locations
+# Expecting bind mount at
 ENV PROJECT_DIR=/project/
+# Expect volume mount at
 ENV GATORGRADER_DIR=/root/.local/share/
 
 WORKDIR ${PROJECT_DIR}
