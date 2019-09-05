@@ -19,14 +19,19 @@ containerized application.
 ```bash
 docker run --rm --name dockagator \
   -v "$(pwd)":/project \
-  -v "$HOME/.dockagator":/root/.local/share \
+  -v "dockagator":/root/.local/share \
   gatoreducator/dockagator
 ```
 
-This will use `"$(pwd)"` (the current directory) as the project directory and
-`"$HOME/.dockagator"` as the cached GatorGrader directory; both directories
-must exist, although only the project directory must contain something. The
-cache directory should not contain anything other than directories and programs
-created by DockaGator, otherwise they may be overridden. To create the directory
-given here (so that this exact command will work),
-execute `mkdir $HOME/.dockagator`.
+This will use `"$(pwd)"` (the current directory) as the project directory and create
+a Docker Volume for the GatorGrader installation; the project directory must exist
+and contain something. To view the cache volume you can use an interactive container;
+this can be used both to run back-to-back `gradle grade` commands, or inspect
+`/root/.local/share`, which is where the volume is mounted.
+
+```bash
+docker run -it --rm --name dockagator \
+  -v "$(pwd)":/project \
+  -v "dockagator":/root/.local/share \
+  gatoreducator/dockagator /bin/bash
+```
