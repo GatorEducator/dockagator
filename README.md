@@ -19,7 +19,7 @@ containerized application.
 ```bash
 docker run --rm --name dockagator \
   -v "$(pwd)":/project \
-  -v "$HOME/.gatorgrader":/root/.local/share \
+  -v "$HOME/.dockagator":/root/.local/share \
   gatoreducator/dockagator
 ```
 
