@@ -2,6 +2,10 @@ language: generic
 dist: xenial
 os: linux
 
+env:
+  global:
+    - secure: "bjhNBRTlMnzamV5M8txcLZQ5agxc+0w4pCIPlfZPs21qTYr4yw4yiQGlpBUpaS0OQE4lJDrbsNxHQMQAgwXRl7nlcsBrnmwKDMIfZ6dtNToy6refG/CoJC86LAHYseDt8swt6zTn2oN+PjL+2ZjJ0PUi0pEfcwTNoTaDMPpjds8ziKBftKYeasersfO/WMth/NHspxuw3bhjkXzrQt7DHHWrI9lmRyN6PxgAnN3lDpWeP0Edrm/z4KDtJNv1IIjSpJ8oRYVRJyYaaLZ16RuNeATcJMH8Yr9g2CZGj212pBfAt6HbQwVuG9pWZ47RJQqPo1MXaJOjrFwKbxX5Z1BeImZAcNmhGceYm8uakergn1YDBcEJmAVkkYXm5GnolVfzrL5ZHsOf0Ya/nztfNDRWYODoQRFTrKwkmjthvrd+5wukh/5bYpxEgkI++ISlz1tVvrJvtq6n1QsOxB1hkfmd3SO5n/vq7q21nUlLLaO/owCdBLwS4+z4qP1kFPxKmZRqD+cjq27T4EkchxkqOhkifgvj1U4L1x++ZTCCxjOtLBpQfkcMLzotL7E7TnnqVmo93aJQbJ6YHwmvu9JSicVqQ7Q33VCcoynrbrrUVq3nmyLJXl4UR9QXrTcvafo+nB76PwwWKS2CUrM8MFXSie9V14dJQqHpvjWKSBXwpt4njZs="
+
 install:
   - gem install mdl
   - docker pull hadolint/hadolint
