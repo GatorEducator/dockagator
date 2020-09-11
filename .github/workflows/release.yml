@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: jefflinse/pr-semver-bump@v1
         name: Bump and Tag Version
+        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == 'true'
         id: bump-tag-version
         with:
           mode: bump
@@ -29,6 +30,7 @@ jobs:
           echo New Version: ${{ steps.bump-tag-version.outputs.version }}
           echo Release Notes: ${{ steps.bump-tag-version.outputs.release-notes }}
       - name: Create Release
+        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == 'true'
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
