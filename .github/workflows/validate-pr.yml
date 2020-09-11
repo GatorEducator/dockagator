@@ -33,4 +33,3 @@ jobs:
         run: |
           echo Old Version: ${{ steps.validate-pr-metadata.outputs.old-version }}
           echo New Version: ${{ steps.validate-pr-metadata.outputs.version }}
-          echo Release Notes: ${{ steps.validate-pr-metadata.outputs.release-notes }}
