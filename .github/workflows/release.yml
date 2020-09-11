@@ -27,7 +27,6 @@ jobs:
         run: |
           echo Old Version: ${{ steps.bump-tag-version.outputs.old-version }}
           echo New Version: ${{ steps.bump-tag-version.outputs.version }}
-          echo Release Notes: ${{ steps.bump-tag-version.outputs.release-notes }}
       - name: Create Release
         if: steps.bump-tag-version.outputs.version != ''
         uses: actions/create-release@v1
