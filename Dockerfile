@@ -13,6 +13,11 @@ VOLUME ${PROJECT_DIR} ${GATORGRADER_DIR}
 RUN set -ex && echo "Installing packages..." && apk update \
     && apk add --no-cache bash python3 git ruby-rdoc openjdk11 gradle npm \
     && rm -rf /var/cache/apk/* \
+    && wget -O /pandoc.tar.gz https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-linux-amd64.tar.gz \
+    && tar -C /usr --strip-components 1 -xzvf /pandoc.tar.gz \
+    && rm /pandoc.tar.gz \
+    && echo "Testing pandoc..." \
+    && /usr/bin/pandoc --version \
     && gem install mdl \
     && npm install -g htmlhint \
     && python3 -m pip install --upgrade pip \
