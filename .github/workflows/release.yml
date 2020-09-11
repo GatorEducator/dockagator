@@ -12,7 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: jefflinse/pr-semver-bump@v1
-      - name: Bump and Tag Version
+        name: Bump and Tag Version
+        id: bump-tag-version
         with:
           mode: bump
           repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -22,3 +23,8 @@ jobs:
           require-release-notes: true
           release-notes-prefix: "# Release notes"
           with-v: true
+      - name: Print Released Metadata
+        run: |
+          echo Old Version: ${{ steps.bump-tag-version.outputs.old-version }}
+          echo New Version: ${{ steps.bump-tag-version.outputs.version }}
+          echo Release Notes: ${{ steps.bump-tag-version.outputs.release-notes }}

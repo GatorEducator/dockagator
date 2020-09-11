@@ -19,6 +19,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: jefflinse/pr-semver-bump@v1
         name: Validate PR Metadata
+        id: validate-pr-metadata
         with:
           mode: validate
           repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -28,3 +29,8 @@ jobs:
           require-release-notes: true
           release-notes-prefix: "# Release notes"
           with-v: true
+      - name: Print Detected Metadata
+        run: |
+          echo Old Version: ${{ steps.validate-pr-metadata.outputs.old-version }}
+          echo New Version: ${{ steps.validate-pr-metadata.outputs.version }}
+          echo Release Notes: ${{ steps.validate-pr-metadata.outputs.release-notes }}
