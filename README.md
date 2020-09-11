@@ -4,8 +4,8 @@
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/gatoreducator/dockagator.svg?style=popout)](https://hub.docker.com/r/gatoreducator/dockagator)
 
 This repository contains the infrastructure needed to generate a Docker image
-that can run [GatorGradle](https://github.com/GatorEducator/gatorgradle)
-on an assignment or project.
+that can run [GatorGradle](https://github.com/GatorEducator/gatorgradle) on an
+assignment or project.
 
 ## Build
 
@@ -23,11 +23,11 @@ docker run --rm --name dockagator \
   gatoreducator/dockagator
 ```
 
-This will use `"$(pwd)"` (the current directory) as the project directory and create
-a separate Docker Volume for the GatorGrader installation; the project directory must
-exist and contain something. To view the cache volume you can use an interactive
-container; this can be used both to run back-to-back `gradle grade` commands, or
-inspect `/root/.local/share`, which is where the volume is mounted.
+This will use `"$(pwd)"` (the current directory) as the project directory and
+create a separate Docker Volume for the GatorGrader installation; the project
+directory must exist and contain something. To view the cache volume you can use
+an interactive container; this can be used both to run back-to-back `gradle grade`
+commands, or inspect `/root/.local/share`, which is where the volume is mounted.
 
 ```bash
 docker run -it --rm --name dockagator \
