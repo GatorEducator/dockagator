@@ -35,3 +35,13 @@ docker run -it --rm --name dockagator \
   -v "dockagator":/root/.local/share \
   gatoreducator/dockagator /bin/bash
 ```
+
+## Contributing
+
+To update DockaGator with new executables, features, or other changes, first
+create a branch and make your changes there. Then, make a PR for that branch
+and add the correct label for the type of change you're making (major, minor,
+or patch). Finally, make sure to include release notes headed by `# Release notes`
+so that the automated release creation process can use them. Now, if all
+CI checks pass, your PR is ready for review, and once merged, will create
+a new release, with new docker images available for use.
