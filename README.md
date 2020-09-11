@@ -24,10 +24,10 @@ docker run --rm --name dockagator \
 ```
 
 This will use `"$(pwd)"` (the current directory) as the project directory and create
-a Docker Volume for the GatorGrader installation; the project directory must exist
-and contain something. To view the cache volume you can use an interactive container;
-this can be used both to run back-to-back `gradle grade` commands, or inspect
-`/root/.local/share`, which is where the volume is mounted.
+a separate Docker Volume for the GatorGrader installation; the project directory must
+exist and contain something. To view the cache volume you can use an interactive
+container; this can be used both to run back-to-back `gradle grade` commands, or
+inspect `/root/.local/share`, which is where the volume is mounted.
 
 ```bash
 docker run -it --rm --name dockagator \
