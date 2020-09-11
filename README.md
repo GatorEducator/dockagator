@@ -1,6 +1,6 @@
 # DockaGator
 
-[![Travis Build Status](https://travis-ci.com/GatorEducator/dockagator.svg?branch=master)](https://travis-ci.com/GatorEducator/dockagator)
+[![Check](https://github.com/GatorEducator/dockagator/workflows/Check/badge.svg)](https://github.com/GatorEducator/dockagator/actions?query=workflow%3ACheck)
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/gatoreducator/dockagator.svg?style=popout)](https://hub.docker.com/r/gatoreducator/dockagator)
 
 This repository contains the infrastructure needed to generate a Docker image
