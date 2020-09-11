@@ -29,13 +29,13 @@ jobs:
           echo New Version: ${{ steps.bump-tag-version.outputs.version }}
           echo Release Notes: ${{ steps.bump-tag-version.outputs.release-notes }}
       - name: Create Release
-        if: ${{ steps.bump-tag-version.outputs.version }} != ''
+        if: steps.bump-tag-version.outputs.version != ''
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.bump-tag-version.outputs.version }}
-          release_name: Release ${{ steps.bump-tag-version.outputs.version }}
+          tag_name: "${{ steps.bump-tag-version.outputs.version }}"
+          release_name: "Release ${{ steps.bump-tag-version.outputs.version }}"
           body: >
             ${{ steps.bump-tag-version.outputs.release-notes }}
 
