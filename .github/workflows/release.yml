@@ -36,7 +36,9 @@ jobs:
           tag_name: ${{ steps.bump-tag-version.outputs.version }}
           release_name: Release ${{ steps.bump-tag-version.outputs.version }}
           body: >
-            Release ${{ steps.bump-tag-version.outputs.version }} of the DockaGator docker image.
+            ${{ steps.bump-tag-version.outputs.release-notes }}
+
+
             See [`README.md`](https://github.com/GatorEducator/dockagator/blob/${{ steps.bump-tag-version.outputs.version }}/README.md)
             for example commands and more details.
           draft: false
