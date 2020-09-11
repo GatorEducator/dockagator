@@ -1,0 +1,43 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  bump-tag-version:
+    name: Bump and Tag Version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: jefflinse/pr-semver-bump@v1
+        name: Bump and Tag Version
+        id: bump-tag-version
+        with:
+          mode: bump
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          major-label: major
+          minor-label: minor
+          patch-label: patch
+          require-release-notes: true
+          release-notes-prefix: "# Release notes"
+          with-v: true
+      - name: Print Released Metadata
+        run: |
+          echo Old Version: ${{ steps.bump-tag-version.outputs.old-version }}
+          echo New Version: ${{ steps.bump-tag-version.outputs.version }}
+          echo Release Notes: ${{ steps.bump-tag-version.outputs.release-notes }}
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.bump-tag-version.outputs.version }}
+          release_name: Release ${{ steps.bump-tag-version.outputs.version }}
+          body: >
+            Release ${{ steps.bump-tag-version.outputs.version }} of the DockaGator docker image.
+            See [`README.md`](https://github.com/GatorEducator/dockagator/blob/${{ steps.bump-tag-version.outputs.version }}/README.md)
+            for example commands and more details.
+          draft: false
+          prerelease: false

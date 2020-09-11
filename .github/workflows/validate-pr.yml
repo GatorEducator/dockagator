@@ -1,0 +1,36 @@
+name: PR
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - opened
+      - edited
+      - reopened
+      - synchronize
+      - ready_for_review
+
+jobs:
+  check-pr:
+    name: Validate PR Release Label and Notes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: jefflinse/pr-semver-bump@v1
+        name: Validate PR Metadata
+        id: validate-pr-metadata
+        with:
+          mode: validate
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          major-label: major
+          minor-label: minor
+          patch-label: patch
+          require-release-notes: true
+          release-notes-prefix: "# Release notes"
+          with-v: true
+      - name: Print Detected Metadata
+        run: |
+          echo Old Version: ${{ steps.validate-pr-metadata.outputs.old-version }}
+          echo New Version: ${{ steps.validate-pr-metadata.outputs.version }}
+          echo Release Notes: ${{ steps.validate-pr-metadata.outputs.release-notes }}
