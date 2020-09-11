@@ -1,0 +1,20 @@
+name: Check
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    name: Lint code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Lint Dockerfile
+        run: |
+          docker run --rm -i hadolint/hadolint < Dockerfile
+      - name: Lint Markdown
+        run: |
+          sudo gem install mdl
+          mdl README.md
