@@ -32,6 +32,9 @@ ENV PYTHONUNBUFFERED=1 \
     PYSETUP_PATH="/opt/pysetup" \
     VENV_PATH="/opt/pysetup/.venv"
 
+# Prepend poetry and venv to path
+ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
+
 WORKDIR ${PROJECT_DIR}
 
 VOLUME ${PROJECT_DIR} ${GATORGRADER_DIR}
