@@ -8,26 +8,26 @@ ENV GATORGRADER_DIR=/root/.local/share/
 
 # Python
 ENV PYTHONUNBUFFERED=1 \
-    # prevents python creating .pyc files
+    # Prevents python from creating .pyc files
     PYTHONDONTWRITEBYTECODE=1 \
     \
-    # pip
+    # Configure pip
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
     \
-    # poetry
+    # Pin the version of poetry
     # https://python-poetry.org/docs/configuration/#using-environment-variables
     POETRY_VERSION=1.0.10 \
-    # make poetry install to this location
+    # Configure poetry install to this location
     POETRY_HOME="/opt/poetry" \
-    # make poetry create the virtual environment in the project's root
+    # Make poetry create the virtual environment in the project's root
     # it gets named `.venv`
     POETRY_VIRTUALENVS_IN_PROJECT=true \
-    # do not ask any interactive question
+    # Do not ask any interactive question
     POETRY_NO_INTERACTION=1 \
     \
-    # paths
+    # Specify the paths for using requirements and virtual environments;
     # this is where our requirements + virtual environment will live
     PYSETUP_PATH="/opt/pysetup" \
     VENV_PATH="/opt/pysetup/.venv"
