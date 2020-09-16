@@ -38,44 +38,31 @@ ENV PYTHONUNBUFFERED=1 \
     PYSETUP_PATH="/opt/pysetup" \
     VENV_PATH="/opt/pysetup/.venv"
 
-# Prepend Poetry's home and the .venv directory to PATH
+# Pre-pend Poetry's home and the .venv directory to PATH
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH:"
 
+# Pre-pend Pyenv's home and the shim directory to PATH
+ENV PATH="$PYENV_HOME/shims:$PYENV_HOME/bin:$PATH"
+
+# Define the project directory as the working directory
 WORKDIR ${PROJECT_DIR}
 
 VOLUME ${PROJECT_DIR} ${GATORGRADER_DIR}
 
-# && python3 -m pip install --upgrade pip \
-
-# # hadolint ignore=DL3008,DL3013,DL3015,DL3016,DL3018,DL3028
-# RUN set -ex && echo "Installing packages..." && apk update \
-#     && apk add --no-cache bash python3 git ruby-rdoc openjdk11 gradle npm \
-#     && rm -rf /var/cache/apk/* \
-#     && wget -O /pandoc.tar.gz https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-linux-amd64.tar.gz \
-#     && tar -C /usr --strip-components 1 -xzvf /pandoc.tar.gz \
-#     && rm /pandoc.tar.gz \
-#     && echo "Testing pandoc..." \
-#     && /usr/bin/pandoc --version \
-#     && gem install mdl \
-#     && npm install -g htmlhint \
-#     && python3 -m pip install --upgrade pip \
-#     && pip install pipenv proselint \
-#     && mkdir -p /root/.gradle/ \
-#     && echo "org.gradle.daemon=true" >> /root/.gradle/gradle.properties \
-#     && echo "systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false" >> /root/.gradle/gradle.properties \
-#     && echo "Testing Gradle..." && gradle --version
-
 # hadolint ignore=DL3008,DL3013,DL3015,DL3016,DL3018,DL3028
-RUN set -ex && echo "Installing packages..." && apk update \
+RUN set -ex && echo "Installing packages with apk..." && apk update \
     && apk add --no-cache bash python3 git ruby-rdoc openjdk11 gradle npm curl gcc build-base libffi-dev openssl-dev bzip2-dev zlib-dev readline-dev sqlite-dev linux-headers \
     && rm -rf /var/cache/apk/* \
+    && echo "Installing pandoc..." \
     && wget -O /pandoc.tar.gz https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-linux-amd64.tar.gz \
     && tar -C /usr --strip-components 1 -xzvf /pandoc.tar.gz \
     && rm /pandoc.tar.gz \
     && echo "Testing pandoc..." \
     && /usr/bin/pandoc --version \
+    && echo "Installing mdl and htmlhint..." \
     && gem install mdl \
     && npm install -g htmlhint \
+    && echo "Installing Python 3.8 with pyenv..." \
     && git clone --depth 1 https://github.com/pyenv/pyenv.git $PYENV_HOME \
     && rm -rfv $PYENV_HOME/.git \
     && pyenv install $PYTHON_VERSION \
