@@ -3,17 +3,18 @@ FROM alpine:3.10
 # Expecting bind mount at
 ENV PROJECT_DIR=/project/
 
-# Expect volume mount at
+# Expecting volume mount at
 ENV GATORGRADER_DIR=/root/.local/share/
 
 # Set Python version
 ARG PYTHON_VERSION='3.8.5'
-# Set pyenv home
+
+# Set Pyenv home
 ARG PYENV_HOME=/root/.pyenv
 
-# Python
+# Configure environment variables for Python
 ENV PYTHONUNBUFFERED=1 \
-    # Prevents python from creating .pyc files
+    # Prevent Python from creating .pyc files
     PYTHONDONTWRITEBYTECODE=1 \
     \
     # Configure pip
@@ -21,26 +22,24 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
     \
-    # Pin the version of poetry
-    # https://python-poetry.org/docs/configuration/#using-environment-variables
+    # Pin the version of Poetry
     POETRY_VERSION=1.0.10 \
-    # Configure poetry install to this location
+    # Configure Poetry's installation directory
     POETRY_HOME="/opt/poetry" \
     # Make poetry create the virtual environment in the project's root
-    # it gets named `.venv`
+    # This virtual environment will be called .venv
     POETRY_VIRTUALENVS_IN_PROJECT=true \
-    # Do not ask any interactive question
+    # Do not ask any interactive questions
+    # during the installation of Poetry
     POETRY_NO_INTERACTION=1 \
     \
     # Specify the paths for using requirements and virtual environments;
-    # this is where our requirements + virtual environment will live
+    # this is where the requirements + virtual environment will live
     PYSETUP_PATH="/opt/pysetup" \
     VENV_PATH="/opt/pysetup/.venv"
 
-# Prepend poetry and venv to path
+# Prepend Poetry's home and the .venv directory to PATH
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH:"
-
-ENV PATH="$PYENV_HOME/shims:$PYENV_HOME/bin:$PATH"
 
 WORKDIR ${PROJECT_DIR}
 
