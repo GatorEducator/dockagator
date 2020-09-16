@@ -47,6 +47,7 @@ ENV PATH="$PYENV_HOME/shims:$PYENV_HOME/bin:$PATH"
 # Define the project directory as the working directory
 WORKDIR ${PROJECT_DIR}
 
+# Specify shared volume storage in the container
 VOLUME ${PROJECT_DIR} ${GATORGRADER_DIR}
 
 # hadolint ignore=DL3008,DL3013,DL3015,DL3016,DL3018,DL3028
@@ -69,13 +70,15 @@ RUN set -ex && echo "Installing packages with apk..." && apk update \
     && pyenv global $PYTHON_VERSION \
     && pip install --upgrade pip \
     && pyenv rehash \
+    && echo "Testing Python..." && python --version \
+    && curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python \
+    && echo "Testing Poetry..." && poetry --version \
     && pip install pipenv \
+    && echo "Testing Pipenv..." && pipenv --version \
     && mkdir -p /root/.gradle/ \
     && echo "org.gradle.daemon=true" >> /root/.gradle/gradle.properties \
     && echo "systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false" >> /root/.gradle/gradle.properties \
-    && echo "Testing Gradle..." && gradle --version \
-    && curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python \
-    && echo "Testing Python..." && python --version \
-    && echo "Testing Poetry..." && poetry --version
+    && echo "Testing Gradle..." && gradle --version
 
+# Define the default action
 CMD ["gradle", "grade"]
