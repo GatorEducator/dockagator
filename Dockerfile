@@ -48,9 +48,27 @@ VOLUME ${PROJECT_DIR} ${GATORGRADER_DIR}
 
 # && python3 -m pip install --upgrade pip \
 
+# # hadolint ignore=DL3008,DL3013,DL3015,DL3016,DL3018,DL3028
+# RUN set -ex && echo "Installing packages..." && apk update \
+#     && apk add --no-cache bash python3 git ruby-rdoc openjdk11 gradle npm \
+#     && rm -rf /var/cache/apk/* \
+#     && wget -O /pandoc.tar.gz https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-linux-amd64.tar.gz \
+#     && tar -C /usr --strip-components 1 -xzvf /pandoc.tar.gz \
+#     && rm /pandoc.tar.gz \
+#     && echo "Testing pandoc..." \
+#     && /usr/bin/pandoc --version \
+#     && gem install mdl \
+#     && npm install -g htmlhint \
+#     && python3 -m pip install --upgrade pip \
+#     && pip install pipenv proselint \
+#     && mkdir -p /root/.gradle/ \
+#     && echo "org.gradle.daemon=true" >> /root/.gradle/gradle.properties \
+#     && echo "systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false" >> /root/.gradle/gradle.properties \
+#     && echo "Testing Gradle..." && gradle --version
+
 # hadolint ignore=DL3008,DL3013,DL3015,DL3016,DL3018,DL3028
 RUN set -ex && echo "Installing packages..." && apk update \
-    && apk add --no-cache bash python3 git ruby-rdoc openjdk11 gradle npm curl linux-headers \
+    && apk add --no-cache bash python3 git ruby-rdoc openjdk11 gradle npm curl gcc build-base libffi-dev openssl-dev bzip2-dev zlib-dev readline-dev sqlite-dev linux-headers \
     && rm -rf /var/cache/apk/* \
     && wget -O /pandoc.tar.gz https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-linux-amd64.tar.gz \
     && tar -C /usr --strip-components 1 -xzvf /pandoc.tar.gz \
@@ -59,7 +77,7 @@ RUN set -ex && echo "Installing packages..." && apk update \
     && /usr/bin/pandoc --version \
     && gem install mdl \
     && npm install -g htmlhint \
-    && git clone --depth 1 https://github.com/pyenv/pyenv.git $PYENV_HOME && \
+    && git clone --depth 1 https://github.com/pyenv/pyenv.git $PYENV_HOME \
     && rm -rfv $PYENV_HOME/.git \
     && pyenv install $PYTHON_VERSION \
     && pyenv global $PYTHON_VERSION \
@@ -70,7 +88,7 @@ RUN set -ex && echo "Installing packages..." && apk update \
     && echo "org.gradle.daemon=true" >> /root/.gradle/gradle.properties \
     && echo "systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false" >> /root/.gradle/gradle.properties \
     && echo "Testing Gradle..." && gradle --version \
-    && curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python3 \
+    && curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python \
     && echo "Testing Python..." && python --version \
     && echo "Testing Poetry..." && poetry --version
 
