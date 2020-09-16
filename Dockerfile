@@ -69,7 +69,7 @@ RUN set -ex && echo "Installing packages with apk..." && apk update \
     && pyenv global $PYTHON_VERSION \
     && pip install --upgrade pip \
     && pyenv rehash \
-    && pip install pipenv proselint \
+    && pip install pipenv \
     && mkdir -p /root/.gradle/ \
     && echo "org.gradle.daemon=true" >> /root/.gradle/gradle.properties \
     && echo "systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false" >> /root/.gradle/gradle.properties \
