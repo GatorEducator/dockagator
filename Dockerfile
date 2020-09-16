@@ -52,7 +52,7 @@ VOLUME ${PROJECT_DIR} ${GATORGRADER_DIR}
 
 # hadolint ignore=DL3008,DL3013,DL3015,DL3016,DL3018,DL3028
 RUN set -ex && echo "Installing packages with apk..." && apk update \
-    && apk add --no-cache bash python3 git ruby-rdoc openjdk11 gradle npm curl gcc build-base libffi-dev openssl-dev bzip2-dev zlib-dev readline-dev sqlite-dev linux-headers \
+    && apk add --no-cache bash git ruby-rdoc openjdk11 gradle npm curl gcc build-base libffi-dev openssl-dev bzip2-dev zlib-dev readline-dev sqlite-dev linux-headers \
     && rm -rf /var/cache/apk/* \
     && echo "Installing pandoc..." \
     && wget -O /pandoc.tar.gz https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-linux-amd64.tar.gz \
