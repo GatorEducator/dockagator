@@ -50,8 +50,7 @@ RUN set -ex && echo "Installing packages with apk..." && apk update \
     && rm -rf /var/cache/apk/* \
     && echo "Installing pandoc..." \
     && wget -O /pandoc.tar.gz https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-linux-amd64.tar.gz \
-    && tar -C /usr --strip-components 1 -xzvf /pandoc.tar.gz \
-    && rm /pandoc.tar.gz \
+    && tar -C /usr --strip-components 1 -xzvf /pandoc.tar.gz && rm /pandoc.tar.gz \
     && echo "Testing pandoc..." \
     && /usr/bin/pandoc --version \
     && echo "Installing mdl" \
@@ -67,7 +66,7 @@ RUN set -ex && echo "Installing packages with apk..." && apk update \
     && pip install pipenv \
     && echo "Testing Pipenv..." && pipenv --version \
     && mkdir -p /root/.gradle/ \
-    && echo "org.gradle.daemon=false" >> /root/.gradle/gradle.properties \
+    && echo "org.gradle.daemon=true" >> /root/.gradle/gradle.properties \
     && echo "systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false" >> /root/.gradle/gradle.properties \
     && echo "Testing Gradle..." && gradle --version
 
