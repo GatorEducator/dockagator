@@ -57,14 +57,18 @@ RUN set -ex && echo "Installing packages with apk..." && apk update \
     && gem install mdl \
     && echo "Installing htmlhint" \
     && npm install -g htmlhint \
+    && echo "Testing Python..." && python --version \
     && echo "Upgrading Pip" \
     && pip install --upgrade pip \
-    && echo "Testing Python..." && python --version \
+    && echo "Testing Pip..." && pip --version \
+    && echo "Installing Poetry..." \
     && wget -O /get-poetry.py https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py \
     && python /get-poetry.py && rm /get-poetry.py \
     && echo "Testing Poetry..." && poetry --version \
+    && echo "Installing Pipenv..." \
     && pip install pipenv \
     && echo "Testing Pipenv..." && pipenv --version \
+    && echo "Setting up Gradle..." \
     && mkdir -p /root/.gradle/ \
     && echo "org.gradle.daemon=true" >> /root/.gradle/gradle.properties \
     && echo "systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false" >> /root/.gradle/gradle.properties \
