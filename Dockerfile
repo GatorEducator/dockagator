@@ -32,8 +32,8 @@ ENV PYTHONUNBUFFERED=1 \
     \
     # Specify the paths for using requirements and virtual environments;
     # this is where the requirements + virtual environment will live
-    PYSETUP_PATH="/opt/pysetup" \
-    VENV_PATH="/opt/pysetup/.venv" \
+    PYSETUP_PATH="/root/.local/share/pysetup" \
+    VENV_PATH="/root/.local/share/pysetup/.venv" \
     # Specify the version of Gradle
     GRADLE_VERSION=5.4.1 \
     # Specify the home directory of Gradle
