@@ -71,7 +71,7 @@ RUN set -ex && echo "Installing Packages with apt-get..." \
     && echo "Installing Pipenv..." \
     && pip install pipenv \
     && echo "Testing Pipenv..." && pipenv --version \
-    && echo "Setting up Gradle..." \
+    && echo "Configuring Gradle..." \
     && mkdir -p /root/.gradle/ \
     && echo "org.gradle.daemon=true" >> /root/.gradle/gradle.properties \
     && echo "systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false" >> /root/.gradle/gradle.properties \
