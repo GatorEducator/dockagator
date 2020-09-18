@@ -45,20 +45,23 @@ WORKDIR ${PROJECT_DIR}
 VOLUME ${PROJECT_DIR} ${GATORGRADER_DIR}
 
 # hadolint ignore=DL3008,DL3013,DL3015,DL3016,DL3018,DL3028
-RUN set -ex && echo "Installing packages with apt-get..." && apk update \
-    && apk add --no-cache bash git ruby-rdoc openjdk11 gradle npm \
-    && rm -rf /var/cache/apk/* \
-    && echo "Installing pandoc..." \
+RUN set -ex && echo "Installing Packages with apt-get..." \
+    && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update \
+    && apt-get -y install --no-install-recommends bash git ruby openjdk-11-jdk gradle npm \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && echo "Installing Pandoc..." \
     && wget -O /pandoc.tar.gz https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-linux-amd64.tar.gz \
     && tar -C /usr --strip-components 1 -xzvf /pandoc.tar.gz && rm /pandoc.tar.gz \
-    && echo "Testing pandoc..." \
+    && echo "Testing Pandoc..." \
     && /usr/bin/pandoc --version \
-    && echo "Installing mdl" \
+    && echo "Installing Markdown Linter called mdl..." \
     && gem install mdl \
-    && echo "Installing htmlhint" \
+    && echo "Installing HTML Linter called htmlhint..." \
     && npm install -g htmlhint \
     && echo "Testing Python..." && python --version \
-    && echo "Upgrading Pip" \
+    && echo "Upgrading Pip..." \
     && pip install --upgrade pip \
     && echo "Testing Pip..." && pip --version \
     && echo "Installing Poetry..." \
