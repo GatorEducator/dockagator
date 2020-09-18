@@ -1,3 +1,4 @@
+# Define the image
 FROM alpine:3.10
 
 # Expecting bind mount at
@@ -13,6 +14,7 @@ ARG PYTHON_VERSION='3.8.5'
 ARG PYENV_HOME=/root/.pyenv
 
 # Configure environment variables for Python
+# when it installs from Pyenv is used by Poetry
 ENV PYTHONUNBUFFERED=1 \
     # Prevent Python from creating .pyc files
     PYTHONDONTWRITEBYTECODE=1 \
@@ -63,23 +65,25 @@ RUN set -ex && echo "Installing packages with apk..." && apk update \
     && echo "Installing mdl and htmlhint..." \
     && gem install mdl \
     && npm install -g htmlhint \
-    && echo "Installing Python 3.8 with pyenv..." \
+    && echo "Installing python 3.8 with pyenv..." \
     && git clone --depth 1 https://github.com/pyenv/pyenv.git $PYENV_HOME \
     && rm -rfv $PYENV_HOME/.git \
     && pyenv install $PYTHON_VERSION \
     && pyenv global $PYTHON_VERSION \
     && pip install --upgrade pip \
     && pyenv rehash \
-    && echo "Testing Python..." && python --version \
+    && echo "Testing python..." && python --version \
+    && echo "Installing poetry..." \
     && wget -O /get-poetry.py https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py \
     && python /get-poetry.py && rm /get-poetry.py \
-    && echo "Testing Poetry..." && poetry --version \
+    && echo "Testing poetry..." && poetry --version \
     && pip install pipenv \
-    && echo "Testing Pipenv..." && pipenv --version \
+    && echo "Testing pipenv..." && pipenv --version \
+    && echo "Configuring gradle..." \
     && mkdir -p /root/.gradle/ \
     && echo "org.gradle.daemon=true" >> /root/.gradle/gradle.properties \
     && echo "systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false" >> /root/.gradle/gradle.properties \
-    && echo "Testing Gradle..." && gradle --version
+    && echo "Testing gradle..." && gradle --version
 
 # Define the default action
 CMD ["gradle", "grade"]
