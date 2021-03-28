@@ -1,7 +1,7 @@
 # Define the image to feature:
 # --> Operating System: Debian Buster
 # --> Python Version: 3.8.5
-FROM python:3.8.5-buster
+FROM python:latest
 
 # Expecting bind mount at
 ENV PROJECT_DIR=/project/
